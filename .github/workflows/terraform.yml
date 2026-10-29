@@ -16,7 +16,6 @@ concurrency:
 env:
   TF_IN_AUTOMATION: "true"
   TF_INPUT: "false"
-  TF_WORKING_DIR: environments/prj-shared-network-test/vpc
 
 jobs:
   secret-detection:
@@ -55,9 +54,15 @@ jobs:
       - secret-detection
       - fmt
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        working_directory:
+          - environments/prj-shared-network-test/vpc
+          - environments/My First Project/compute
     defaults:
       run:
-        working-directory: ${{ env.TF_WORKING_DIR }}
+        working-directory: ${{ matrix.working_directory }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -82,9 +87,15 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        working_directory:
+          - environments/prj-shared-network-test/vpc
+          - environments/My First Project/compute
     defaults:
       run:
-        working-directory: ${{ env.TF_WORKING_DIR }}
+        working-directory: ${{ matrix.working_directory }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
