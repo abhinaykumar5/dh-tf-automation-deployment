@@ -117,3 +117,43 @@ jobs:
 
       - name: Plan
         run: terraform plan -no-color
+
+  apply:
+    name: apply
+    needs:
+      - plan
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        working_directory:
+          - environments/prj-shared-network-test/vpc
+          - environments/My First Project/compute
+    defaults:
+      run:
+        working-directory: ${{ matrix.working_directory }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.12.2
+          terraform_wrapper: false
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/194814420935/locations/global/workloadIdentityPools/github/providers/github
+          service_account: tf-automation-sa@prj-shared-network-test-513109.iam.gserviceaccount.com
+
+      - name: Init
+        run: terraform init
+
+      - name: Apply
+        run: terraform apply -auto-approve -no-color
