@@ -4,7 +4,7 @@ region     = "us-central1"
 compute = {
   dh-dev-compute = {
     machine_type = "e2-micro"
-    zone         = "us-central1-b"
+    zone         = "us-central1-a"
     tags         = ["dh-dev-compute"]
     network      = "default"
     subnetwork   = "default"
@@ -13,3 +13,4 @@ compute = {
     disk_type    = "pd-balanced"
   }
 }
+
