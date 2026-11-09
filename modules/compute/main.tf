@@ -13,8 +13,9 @@ resource "google_compute_instance" "this" {
   }
 
   network_interface {
-    network    = var.network
-    subnetwork = var.subnetwork
+    network            = var.network
+    subnetwork         = var.subnetwork
+    subnetwork_project = var.subnetwork_project
   }
 }
 

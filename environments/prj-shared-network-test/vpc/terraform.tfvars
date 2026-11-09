@@ -1,6 +1,18 @@
 project_id = "prj-shared-network-test-513109"
 region     = "us-central1"
 
+shared_vpc_service_projects = [
+  "project-03ca8a54-2170-4c4e-8b7",
+]
+
+shared_vpc_network_users = [
+  {
+    member     = "serviceAccount:351680271643@cloudservices.gserviceaccount.com"
+    subnetwork = "shared-test-us-central1"
+    region     = "us-central1"
+  },
+]
+
 vpcs = {
   dh-dev-vpc = {
     description = "Shared test VPC for prj-shared-network-test-513109."
