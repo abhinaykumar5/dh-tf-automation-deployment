@@ -8,6 +8,22 @@ variable "region" {
   type        = string
 }
 
+variable "shared_vpc_service_projects" {
+  description = "Service projects attached to this project as a Shared VPC host."
+  type        = set(string)
+  default     = []
+}
+
+variable "shared_vpc_network_users" {
+  description = "Members granted roles/compute.networkUser on a host subnet."
+  type = list(object({
+    member     = string
+    subnetwork = string
+    region     = string
+  }))
+  default = []
+}
+
 variable "vpcs" {
   description = "VPC networks to create, keyed by network name."
   type = map(object({

@@ -11,13 +11,14 @@ variable "region" {
 variable "compute" {
   description = "The compute instances."
   type = map(object({
-    machine_type = string
-    zone         = string
-    tags         = list(string)
-    network      = string
-    subnetwork   = string
-    disk_name    = string
-    disk_size    = number
-    disk_type    = string
+    machine_type       = string
+    zone               = string
+    tags               = list(string)
+    network            = string
+    subnetwork         = string
+    subnetwork_project = string
+    disk_name          = string
+    disk_size          = number
+    disk_type          = string
   }))
 }

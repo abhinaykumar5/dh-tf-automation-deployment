@@ -28,6 +28,12 @@ variable "subnetwork" {
   type        = string
 }
 
+variable "subnetwork_project" {
+  description = "Project that owns the subnetwork. Set this when the subnet is in another project."
+  type        = string
+  nullable    = true
+}
+
 variable "boot_image" {
   description = "Image used to create the instance boot disk."
   type        = string
