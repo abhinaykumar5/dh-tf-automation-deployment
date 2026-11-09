@@ -1,8 +1,9 @@
 resource "google_compute_instance" "this" {
-  name         = var.name
-  machine_type = var.machine_type
-  zone         = var.zone
-  tags         = var.tags
+  name                      = var.name
+  machine_type              = var.machine_type
+  zone                      = var.zone
+  tags                      = var.tags
+  allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
